@@ -1,0 +1,365 @@
+﻿<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Neighborly - Neighborhood Listings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&amp;family=Manrope:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#7e7b70",
+                        "error-dim": "#770326",
+                        "secondary": "#6153a2",
+                        "primary-fixed-dim": "#b3a9ff",
+                        "on-primary": "#fcf7ff",
+                        "on-tertiary": "#fff8f2",
+                        "primary-container": "#c1b9ff",
+                        "surface-container": "#f3ede3",
+                        "on-tertiary-container": "#615748",
+                        "secondary-fixed-dim": "#d8ceff",
+                        "surface-container-highest": "#e7e2d5",
+                        "on-tertiary-fixed-variant": "#6c6152",
+                        "on-primary-fixed-variant": "#4024bc",
+                        "surface-tint": "#5a46d6",
+                        "surface-container-high": "#ede8dc",
+                        "surface-bright": "#fef9f1",
+                        "tertiary-dim": "#5c5243",
+                        "primary": "#5a46d6",
+                        "on-secondary": "#fcf7ff",
+                        "secondary-fixed": "#e6deff",
+                        "on-error-container": "#68001f",
+                        "tertiary-container": "#fbecd8",
+                        "inverse-surface": "#0f0e0a",
+                        "on-secondary-container": "#544694",
+                        "on-surface": "#34322a",
+                        "on-primary-container": "#3614b4",
+                        "on-surface-variant": "#625f55",
+                        "on-tertiary-fixed": "#4e4537",
+                        "surface-variant": "#e7e2d5",
+                        "inverse-primary": "#8e7fff",
+                        "inverse-on-surface": "#a09c96",
+                        "error": "#ac3149",
+                        "secondary-dim": "#554795",
+                        "error-container": "#f76a80",
+                        "background": "#F6F1E9",
+                        "outline-variant": "#b6b2a6",
+                        "surface-dim": "#dfdacc",
+                        "primary-fixed": "#c1b9ff",
+                        "surface": "#F6F1E9",
+                        "tertiary-fixed": "#fbecd8",
+                        "tertiary": "#685e4e",
+                        "surface-container-low": "#f8f3ea",
+                        "tertiary-fixed-dim": "#edddca",
+                        "on-secondary-fixed": "#413380",
+                        "on-secondary-fixed-variant": "#5e509e",
+                        "on-error": "#fff7f7",
+                        "on-primary-fixed": "#220087",
+                        "secondary-container": "#e6deff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#34322a",
+                        "primary-dim": "#4e37ca"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>.material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+    }
+.full-page-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url(https://lh3.googleusercontent.com/aida/ADBb0ui9FiqxkZS73JLyVdbLYvgBvHwsdWId8_tt5WPa57P9xMmZRsO3qaOo17q6tVMdAUzuYWydN0lkcIHnXGcOy-Denj4xLOnYAxSsJsWENWd5Zvo9NCWaVFmASvoVcJvq2j80n6onzCS29RwJqUUo1eN9JUGgl0Kw9S66VsCTyodFJNo6bOVtElQkzMbXHDlwgO3t7ZNB7D3PKl2j4lIiATMyihlns4WZBEGzACbYytF4iKEJtnA-iGzJzfOSowqKUtIQYfEM_j_U);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed
+    }
+.shelf-plank {
+    height: 20px;
+    background: linear-gradient(to bottom, #dcc8b1 0%, #c4af96 100%);
+    border-bottom: 4px solid #b39b7f;
+    border-radius: 2px 2px 10px 10px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 15px 25px -5px rgba(78, 69, 55, 0.15);
+    position: relative;
+    z-index: 20
+    }
+.shelf-plank::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: 0;
+    right: 0;
+    height: 14px;
+    background: #e6d5c1;
+    transform: perspective(100px) rotatex(15deg);
+    transform-origin: bottom;
+    border-top: 1px solid rgba(255, 255, 255, 0.4)
+    }
+.contact-shadow {
+    position: absolute;
+    bottom: -2px;
+    left: 5%;
+    width: 90%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    filter: blur(3px);
+    border-radius: 50%;
+    z-index: 5
+    }
+.ambient-shadow {
+    position: absolute;
+    bottom: -15px;
+    left: -5%;
+    width: 110%;
+    height: 40px;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+    filter: blur(12px);
+    z-index: 2;
+    transition: all 0.4s ease
+    }
+.item-container:hover .ambient-shadow {
+    transform: scale(1.15);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 75%)
+    }
+.item-image-wrapper {
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1)
+    }
+.item-image-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+    pointer-events: none
+    }
+.item-image-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.15) 0%, transparent 40%);
+    z-index: 11;
+    pointer-events: none
+    }
+.item-image {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)
+    }
+.item-container:hover .item-image {
+    transform: translatey(-8px) scale(1.02)
+    }
+.golden-hour-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 230, 150, 0.03) 0%, rgba(255, 180, 50, 0.05) 100%);
+    pointer-events: none;
+    z-index: 100
+    }</style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<div class="full-page-bg"></div>
+<div class="golden-hour-overlay"></div>
+<header class="w-full top-0 sticky z-[60] bg-[#F6F1E9]/40 backdrop-blur-lg shadow-sm border-b border-black/5">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold text-[#5a46d6] italic font-headline">Neighborly</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-[#5a46d6] font-bold font-headline text-sm tracking-tight transition-opacity hover:opacity-80" href="#">Shelves</a>
+<a class="text-[#4e4537] font-headline text-sm tracking-tight transition-opacity hover:opacity-80" href="#">Discover</a>
+<a class="text-[#4e4537] font-headline text-sm tracking-tight transition-opacity hover:opacity-80" href="#">My Items</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="bg-surface-container-high/50 border-none rounded-full py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary/20 bg-surface-container-highest transition-all" placeholder="Search the neighborhood..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:opacity-80 transition-opacity">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:opacity-80 transition-opacity">chat_bubble</span>
+<div class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden border-2 border-white shadow-sm">
+<img alt="User profile" data-alt="close-up portrait of a friendly young man with a warm smile and professional attire in a bright office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPV_A__pKXyV_haWDdXKa-f0aPRyJNX90gnbLZytqEKy7e7TM3GnAE9FGxT8EeofAbMo4TxapDFi6faa3JFQTRj_1yW7qTPTzyFIWKcAj-buGF-zjIcsnRerkA-bv1ZVmiOHOIcs0KBFCS29oNlXBO9SzPyP_zv4DKL1vedE1uU-btuTY7cA_PzGtco-Zr8eeCrRFhUxaXKju-fxCu3V2iF4Zt6sZm8alzdyz5qx0rQZBNl7O2P6JelsqM73GxxzvkNVscZ3xAwQ"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-screen-2xl mx-auto px-8 py-12 relative z-10">
+<div class="mb-24">
+<h1 class="text-5xl font-extrabold font-headline text-on-surface mb-4 tracking-tight">Browse the Neighborhood</h1>
+<p class="text-on-surface-variant max-w-xl font-body text-lg leading-relaxed">Curation meets neighborhood life. Discover high-quality items shared by students and local mates, arranged for your inspiration.</p>
+</div>
+<section class="space-y-48">
+<!-- Shelf Row 1 -->
+<div class="relative">
+<div class="flex flex-wrap items-end justify-around gap-12 mb-[-1px] px-8">
+<!-- Item 1 -->
+<div class="item-container relative flex flex-col items-center w-[320px] group cursor-pointer translate-x-1">
+<div class="relative w-full aspect-[4/3] scale-100">
+<div class="contact-shadow"></div>
+<div class="ambient-shadow"></div>
+<div class="item-image-wrapper w-full h-full">
+<img class="item-image w-full h-full object-cover" data-alt="professional silver dslr camera with prime lens on a minimalist white surface with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5CTa3YWezYAR-j-7brgu3cXWhw6es_7UFyIL0qjWDQhA41kwM-QsijBJ2ZsDJmSUvF4w1g_r1Mnz2sjifalMMN377k1UEh3C1GRzun_t-jcw7sViPsTMGl7k3xK6a49yAHNRJ4YWv6pJl90GT53RExN9OW9GrDuHt9jvt9EK-n1MZgcAejF2UTpbGON-mfHjCUBPF7epwTvldqWKwyEgyuG7w7rZ0bWir8USrqmETy7W1PFrSifl3sOxGtggPBqc-Oq_yRUbysQ"/>
+</div>
+</div>
+<div class="absolute -bottom-32 w-full text-center space-y-1 py-4">
+<h3 class="text-sm font-bold font-headline text-on-surface">Fujifilm X-T4 Kit</h3>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">by Sarah Jenkins • <span class="text-primary font-bold">$25/day</span></p>
+<div class="pt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">Request</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="item-container relative flex flex-col items-center w-[320px] group cursor-pointer -translate-x-3">
+<div class="relative w-full aspect-[4/3] scale-[0.96]">
+<div class="contact-shadow"></div>
+<div class="ambient-shadow"></div>
+<div class="item-image-wrapper w-full h-full">
+<img class="item-image w-full h-full object-cover" data-alt="modern white digital projector casting a soft blue glow in a cozy darkened living room setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzDSR0KUJFgB5rf9jMyN_jmucNPlo2VylP580x2fXBTpmxDzcMBt9_zZdDlu-TwBR7zoE_RJuijrQXRK2J8p7Tub6TaVoJ0l9UfeMuLImGN_f4-WD6FQspuTHq5O3XBVGXMT3xEpQzFyOfEnv1rWVjVZdzckTIj8Z6I5hIp15XR1BYirluE58f_YDhgcQxYd7UFTEsGHU1Ot5LFkmYZILBSmagkS3rQxUUlQ5Ld3PzmNvX0ZeE3KdsCXKs9eq8bsbZtwuqI-ny_A"/>
+</div>
+</div>
+<div class="absolute -bottom-32 w-full text-center space-y-1 py-4">
+<h3 class="text-sm font-bold font-headline text-on-surface">4K Theater Projector</h3>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">by Marcus Chen • <span class="text-primary font-bold">$40/day</span></p>
+<div class="pt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">Request</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="item-container relative flex flex-col items-center w-[320px] group cursor-pointer translate-x-2">
+<div class="relative w-full aspect-[4/3] scale-[1.03]">
+<div class="contact-shadow"></div>
+<div class="ambient-shadow"></div>
+<div class="item-image-wrapper w-full h-full">
+<img class="item-image w-full h-full object-cover" data-alt="vintage leather craft tool set neatly arranged on a rustic wooden workbench with warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCorBFQL0RjsFNv4d8iu0J4ap_LYx5Mq3zORyLDK18VYECCHrAfp3UtEhX3Wygzx5GB7QTt58Vb_DwAAT3FCPIVv_XN3RzI-X49A5TF6_UXu8Df18lMCS5rcgC9jwacCOXSXx-qWVlFzKzoWZxqMP_5PJP1wutcT1E2drvRc0FBLhjJbbE2s_E1hmIFRvW7E7Fp-3d45mdbB6rUPZZE0tmx-ENsE18kuJXKkNbablJJFsQxYGoZKNrB3HaIRFOZyn1v6unbX193FQ"/>
+</div>
+</div>
+<div class="absolute -bottom-32 w-full text-center space-y-1 py-4">
+<h3 class="text-sm font-bold font-headline text-on-surface">Leather Craft Toolset</h3>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">by Elena Rossi • <span class="text-primary font-bold">$15/day</span></p>
+<div class="pt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">Request</button>
+</div>
+</div>
+</div>
+</div>
+<div class="shelf-plank w-full"></div>
+</div>
+<!-- Shelf Row 2 -->
+<div class="relative">
+<div class="flex flex-wrap items-end justify-around gap-12 mb-[-1px] px-8">
+<!-- Item 4 -->
+<div class="item-container relative flex flex-col items-center w-[320px] group cursor-pointer -translate-x-1">
+<div class="relative w-full aspect-[4/3] scale-[0.98]">
+<div class="contact-shadow"></div>
+<div class="ambient-shadow"></div>
+<div class="item-image-wrapper w-full h-full">
+<img class="item-image w-full h-full object-cover" data-alt="sleek modern white smart watch on a neutral background with elegant soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbR5Lfyco5ZXuSVLoOx7QaeSVH6aIVAs2su1jvgeV3LpKoosdxshfvzwSXKXbLr5lsyr0-Yo1-NtJoxVMS9buetbAUjjWCO4Jx2ooXqIriblU_udsyS5YVf8EE8unIfLM61DPrfhPxjVHOnOIrDqAZM9nTJ53InDpZYQOcPQm0UiSGy47BkvTnu3D61WPbg787nHCJw8vPedxMVUMhyJzmDjvIA8gCJEgfncE8vvHwh-N9uf7rh2sNRt8pZ9Oq2NM6lwTIvN-DIw"/>
+</div>
+</div>
+<div class="absolute -bottom-32 w-full text-center space-y-1 py-4">
+<h3 class="text-sm font-bold font-headline text-on-surface">Apple Watch Series 8</h3>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">by Tom Miller • <span class="text-primary font-bold">$12/day</span></p>
+<div class="pt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">Request</button>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="item-container relative flex flex-col items-center w-[320px] group cursor-pointer translate-x-4">
+<div class="relative w-full aspect-[4/3] scale-[1.05]">
+<div class="contact-shadow"></div>
+<div class="ambient-shadow"></div>
+<div class="item-image-wrapper w-full h-full">
+<img class="item-image w-full h-full object-cover" data-alt="minimalist mid-century modern blue armchair in a sun-drenched corner of a high-end apartment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBanDX0aPUOqdgCrJ43GRhT9-BXnz3RNzLXdzycSpbWSToffEF5j9Ju34QDZ6wl_Ya7YTeY6tws6yTh9wzcC6YxipjS4YPDsVzxT0AGimzjd7aqO7hCA6srrGiL08ptyDPmsAmIrVTcIvgQQlPuIj3rSRApmZxDvN-62G-MhpnV3XZeMAAg1t1eV-FnNAQAmmQABZNob3qxFLqFfbwD3C89U6XLKc9EgLDLawN4TU0HWNzjU8tJ8kEepQK4VxSqS0C12ZuWFjdaUA"/>
+</div>
+</div>
+<div class="absolute -bottom-32 w-full text-center space-y-1 py-4">
+<h3 class="text-sm font-bold font-headline text-on-surface">Modern Accent Chair</h3>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">by Chloe Vance • <span class="text-primary font-bold">$18/day</span></p>
+<div class="pt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">Request</button>
+</div>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="item-container relative flex flex-col items-center w-[320px] group cursor-pointer -translate-x-2">
+<div class="relative w-full aspect-[4/3] scale-[0.97]">
+<div class="contact-shadow"></div>
+<div class="ambient-shadow"></div>
+<div class="item-image-wrapper w-full h-full">
+<img class="item-image w-full h-full object-cover" data-alt="professional heavy-duty blue power drill sitting on a gray concrete surface with dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEK_HkInVlVf314eCs25z06BJeDE3HGcqXVKqjH_3nSWw_nioD2Qglv8fPl_-tw_HT9ANetgikoCi3dLhUtbr4cO2EOqmDgTq_sI3hWoLsY9Dt8buV_Ku3xcle49Gmuh0hRKHN_Tg_yXG5Q5EdPnR1maVOYYeqqn9chjM9aCvEOwf-B49AlA7nBdjZY6Cy27nYUcKe559J8hI83flftW6yQWAcEu5apa55ePZtG88y-xNaQVYQRO_cDk-DVJETksAHfTpoVO1IHA"/>
+</div>
+</div>
+<div class="absolute -bottom-32 w-full text-center space-y-1 py-4">
+<h3 class="text-sm font-bold font-headline text-on-surface">Impact Drill Pro 2.0</h3>
+<p class="text-[10px] font-label text-on-surface-variant uppercase tracking-wider">by Jack Thorne • <span class="text-primary font-bold">$22/day</span></p>
+<div class="pt-3 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest shadow-lg">Request</button>
+</div>
+</div>
+</div>
+</div>
+<div class="shelf-plank w-full"></div>
+</div>
+</section>
+<div class="mt-56 mb-32 flex justify-center">
+<button class="px-12 py-4 rounded-full bg-secondary-container/80 backdrop-blur-sm text-on-secondary-container font-bold font-headline transition-all hover:bg-secondary-fixed active:scale-95 flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined">expand_more</span>
+                Show More Items
+            </button>
+</div>
+</main>
+<footer class="md:hidden">
+<nav class="fixed bottom-0 left-0 w-full z-[70] flex justify-around items-center px-4 pb-8 pt-4 bg-[#F6F1E9]/80 backdrop-blur-xl shadow-[0_-10px_40px_rgba(0,0,0,0.04)] rounded-t-[2.5rem]">
+<a class="flex flex-col items-center justify-center bg-[#c1b9ff] text-[#5a46d6] rounded-full px-6 py-2" href="#">
+<span class="material-symbols-outlined" data-icon="shelves">shelves</span>
+<span class="text-[11px] font-label uppercase tracking-widest font-semibold mt-1">Shelves</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#4e4537] px-6 py-2 hover:bg-[#fbecd8] rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[11px] font-label uppercase tracking-widest font-semibold mt-1">Discover</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#4e4537] px-6 py-2 hover:bg-[#fbecd8] rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="text-[11px] font-label uppercase tracking-widest font-semibold mt-1">My Items</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#4e4537] px-6 py-2 hover:bg-[#fbecd8] rounded-full transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="text-[11px] font-label uppercase tracking-widest font-semibold mt-1">Community</span>
+</a>
+</nav>
+</footer>
+<div class="hidden md:block fixed bottom-12 right-12 z-[70]">
+<button class="w-16 h-16 rounded-full bg-primary text-on-primary shadow-xl flex items-center justify-center transition-all hover:scale-110 hover:shadow-[0_10px_30px_rgba(90,70,214,0.3)] active:scale-95">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+</body></html>

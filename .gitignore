@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# Environment Variables
+.env
+.env.local
+
+# Docker & Database
+mysql_data/
+redis_data/
+
+# Application Specific
+uploads/
+StackSavefinal/
+*.log
+
+# Flutter & Dart (Mobile App)
+neighborly_mobile/.dart_tool/
+neighborly_mobile/.flutter-plugins
+neighborly_mobile/.flutter-plugins-dependencies
+neighborly_mobile/.pub-cache/
+neighborly_mobile/.pub/
+neighborly_mobile/build/
+neighborly_mobile/android/local.properties
+neighborly_mobile/ios/.symlinks/
+neighborly_mobile/ios/Pods/
+
+# OS Generated
+.DS_Store
+Thumbs.db

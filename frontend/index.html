@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Neighborly - Local & Neighborhood Rentals</title>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#7e7b70",
+                        "error-dim": "#770326",
+                        "secondary": "#6153a2",
+                        "primary-fixed-dim": "#b3a9ff",
+                        "on-primary": "#fcf7ff",
+                        "on-tertiary": "#fff8f2",
+                        "primary-container": "#c1b9ff",
+                        "surface-container": "#f3ede3",
+                        "on-tertiary-container": "#615748",
+                        "secondary-fixed-dim": "#d8ceff",
+                        "surface-container-highest": "#e7e2d5",
+                        "on-tertiary-fixed-variant": "#6c6152",
+                        "on-primary-fixed-variant": "#4024bc",
+                        "surface-tint": "#5a46d6",
+                        "surface-container-high": "#ede8dc",
+                        "surface-bright": "#fef9f1",
+                        "tertiary-dim": "#5c5243",
+                        "primary": "#5a46d6",
+                        "on-secondary": "#fcf7ff",
+                        "secondary-fixed": "#e6deff",
+                        "on-error-container": "#68001f",
+                        "tertiary-container": "#fbecd8",
+                        "inverse-surface": "#0f0e0a",
+                        "on-secondary-container": "#544694",
+                        "on-surface": "#34322a",
+                        "on-primary-container": "#3614b4",
+                        "on-surface-variant": "#625f55",
+                        "on-tertiary-fixed": "#4e4537",
+                        "surface-variant": "#e7e2d5",
+                        "inverse-primary": "#8e7fff",
+                        "inverse-on-surface": "#a09c96",
+                        "error": "#ac3149",
+                        "secondary-dim": "#554795",
+                        "error-container": "#f76a80",
+                        "background": "#F6F1E9",
+                        "outline-variant": "#b6b2a6",
+                        "surface-dim": "#dfdacc",
+                        "primary-fixed": "#c1b9ff",
+                        "surface": "#F6F1E9",
+                        "tertiary-fixed": "#fbecd8",
+                        "tertiary": "#685e4e",
+                        "surface-container-low": "#f8f3ea",
+                        "tertiary-fixed-dim": "#edddca",
+                        "on-secondary-fixed": "#413380",
+                        "on-secondary-fixed-variant": "#5e509e",
+                        "on-error": "#fff7f7",
+                        "on-primary-fixed": "#220087",
+                        "secondary-container": "#e6deff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#34322a",
+                        "primary-dim": "#4e37ca"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+        .full-page-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: url('/static/assets/ea29701a-61be-4a2a-b22c-c8f381d8fe71.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: opacity(0.32) blur(1px);
+        }
+        .shelf-plank {
+            height: 20px;
+            background: linear-gradient(to bottom, #dcc8b1 0%, #c4af96 100%);
+            border-bottom: 4px solid #b39b7f;
+            border-radius: 2px 2px 10px 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 15px 25px -5px rgba(78, 69, 55, 0.15);
+            position: relative;
+            z-index: 20;
+        }
+        .shelf-plank::before {
+            content: "";
+            position: absolute;
+            top: -14px;
+            left: 0;
+            right: 0;
+            height: 14px;
+            background: #e6d5c1;
+            transform: perspective(100px) rotatex(15deg);
+            transform-origin: bottom;
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .contact-shadow {
+            position: absolute;
+            bottom: -2px;
+            left: 5%;
+            width: 90%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            filter: blur(3px);
+            border-radius: 50%;
+            z-index: 5;
+        }
+        .ambient-shadow {
+            position: absolute;
+            bottom: -15px;
+            left: -5%;
+            width: 110%;
+            height: 40px;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(12px);
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+        .item-container:hover .ambient-shadow {
+            transform: scale(1.15);
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 75%);
+        }
+        .item-image-wrapper {
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        .item-image-wrapper::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.2), transparent);
+            pointer-events: none;
+        }
+        .item-image-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.15) 0%, transparent 40%);
+            z-index: 11;
+            pointer-events: none;
+        }
+        .item-image {
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .item-container:hover .item-image {
+            transform: translatey(-8px) scale(1.02);
+        }
+        .golden-hour-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 230, 150, 0.03) 0%, rgba(255, 180, 50, 0.05) 100%);
+            pointer-events: none;
+            z-index: 100;
+        }
+        /* Custom scrollbar hiding utility */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Gradient Button */
+        button.bg-gradient-to-b {
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface/90 font-body text-on-surface">
+    <div class="full-page-bg"></div>
+    <div class="golden-hour-overlay"></div>
+    
+    <div id="app"></div>
+
+    <script type="module" src="/static/app.js?v=20260420g"></script>
+</body>
+</html>
