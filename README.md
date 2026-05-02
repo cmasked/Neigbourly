@@ -1,5 +1,3 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/cmasked/Neigborly/main/frontend/assets/ea29701a-61be-4a2a-b22c-c8f381d8fe71.png" alt="Neighborly Banner" width="100%" />
   
   <br />
   <br />
