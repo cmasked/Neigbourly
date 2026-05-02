@@ -1,8 +1,4 @@
-  
-  <br />
-  <br />
-
-  <h1>Neighborly 🏡</h1>
+ <h1>Neighborly 🏡</h1>
   <p>
     <b>A premium, peer-to-peer rental network for isolated neighborhood communities.</b>
   </p>
