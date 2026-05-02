@@ -29,6 +29,7 @@ Rather than buying items you only use once a year, you can rent them for a fract
 - **Cross-Platform Access**: Includes a beautifully crafted **Flutter Mobile Application** and a responsive **Vue.js Web Application**.
 - **The "Curated Hearth" Aesthetic**: Stunning UI design featuring glassmorphism, golden-hour ambient shadows, and a unified platform backdrop.
 - **Dynamic Trust Scores**: Users start with a base score that increases with good behavior (on-time returns, 5-star reviews) and decreases with disputes or late returns.
+- **Escrow Payment Engine**: Funds are held in escrow on rental confirmation and automatically released to the owner via Celery workers upon return confirmation — neither party can be cheated.
 - **Automated Workflow Engine**: Transactions follow a strict state machine (`pending` → `confirmed` → `picked_up` → `returned`).
 
 ## 🏗️ Technology Stack
