@@ -19,6 +19,8 @@ redis_data/
 uploads/
 StackSavefinal/
 *.log
+code.html
+ea29701a-61be-4a2a-b22c-c8f381d8fe71.png
 
 # Flutter & Dart (Mobile App)
 neighborly_mobile/.dart_tool/
