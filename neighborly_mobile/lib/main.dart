@@ -27,16 +27,24 @@ class NeighborlyApp extends ConsumerWidget {
           fit: StackFit.expand,
           children: [
             // Global backdrop
-            Opacity(
-              opacity: 0.15,
-              child: Image.asset(
-                'assets/images/backdrop.png',
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(color: AppColors.surface),
-              ),
+            Image.asset(
+              'assets/images/backdrop.png',
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(color: AppColors.surface),
             ),
             // Semi-transparent surface to soften it globally
-            Container(color: AppColors.surface.withOpacity(0.85)),
+            Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    AppColors.surface.withOpacity(0.7),
+                    AppColors.surface.withOpacity(0.4), // Less opaque at the bottom to show image
+                  ],
+                ),
+              ),
+            ),
             // The actual app content on top
             if (child != null) child,
           ],
